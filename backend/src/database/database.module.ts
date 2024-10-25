@@ -4,7 +4,7 @@ import { databaseModelsProviders } from './database-models.providers';
 import mongodbConfig from 'config/mongodb.config';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mini-game';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://mongo1:27017,mongo2:27017,mongo3:27017/my_database_name?replicaSet=my-mongo-set';
 
 @Module({
     imports: [

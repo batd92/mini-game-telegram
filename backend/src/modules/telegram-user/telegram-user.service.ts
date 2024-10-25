@@ -39,11 +39,11 @@ export class TelegramUserService {
 
     const totalGameScore = await this.gameHistoryService.getTotalScore(id).toPromise();
     const totalTaskScore = await this.taskHistoryService.getTotalScore(id).toPromise();
-    const { totalScore: referralScore, totalReferrals } = await this.referralService.getReferralStats(id).toPromise();
+    const { data } = await this.referralService.getReferralStats(id).toPromise();
     const gameInfo = await this.gameProfileService.getGameUserById(id).toPromise();
 
     return {
-        data: { // Return an object with a data property
+        data: {
             _id: user._id.toString(),
             telegram_id: user.telegram_id,
             user_name: user.user_name,
@@ -53,8 +53,8 @@ export class TelegramUserService {
             analytics: {
                 game_score: totalGameScore,
                 task_score: totalTaskScore,
-                referral_score: referralScore,
-                total_referrals: totalReferrals,
+                referral_score: data.length * 100,
+                total_referrals: data.length,
             },
             game_info: {
                 number_of_attempts: gameInfo.number_of_attempts,
